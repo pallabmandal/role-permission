@@ -1,0 +1,19 @@
+{
+    "name": "pallab/role-permission",
+    "description": "An Api based Role Permission management system for PHP",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pallab\\RolePermission\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pallab Mandal",
+            "email": "pallabmandal92@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    }
+}
