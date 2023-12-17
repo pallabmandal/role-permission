@@ -3,6 +3,8 @@
 namespace Pallab\RolePermission;
 
 use Illuminate\Support\ServiceProvider;
+use Pallab\RolePermission\Commands\GeneratePermissions;
+use Pallab\RolePermission\Commands\SeedSuperAdminRole;
 
 class RolePermissionServiceProvider extends ServiceProvider
 {
@@ -15,9 +17,7 @@ class RolePermissionServiceProvider extends ServiceProvider
             __DIR__ . '/config/role-permission.php' => config_path('role-permission.php'),
         ], 'config');
 
-        $this->publishes([
-            __DIR__ . '/database/migrations/' => database_path('migrations'),
-        ], 'migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations/');
     }
 
     /**
@@ -29,5 +29,11 @@ class RolePermissionServiceProvider extends ServiceProvider
             __DIR__ . '/config/role-permission.php',
             'role-permission'
         );
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                GeneratePermissions::class,
+                SeedSuperAdminRole::class
+            ]);
+        }
     }
 }
