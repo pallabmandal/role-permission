@@ -48,6 +48,19 @@ trait Permissible
     }
 
     /**
+     * @param Builder $query
+     * @param $role
+     * @return void
+     */
+    public function scopeWhereHasRoleId(Builder $query, $role): void
+    {
+        $query->whereHas('roles', function ($q) use ($role)
+        {
+            $q->where('roles.id', $role);
+        });
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function roles(): BelongsToMany
